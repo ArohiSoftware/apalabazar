@@ -1,6 +1,13 @@
-import React from "react";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate('/category');
+  };
+
   return (
     <div className="shadow-lg ">
       {/* Top Navbar */}
@@ -53,7 +60,7 @@ const Navbar = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                d="M3 3h18l-1.68 9.39a2 2 0 01-1.98 1.61H6.66a2 2 0 01-1.98-1.61L3 3zm0 0l1.68 9.39a2 2 0 001.98 1.61h10.68a2 2 0 001.98-1.61L21 3M5 21h14"
+                d="M3 3h18l-1.68 9.39a2 2 0 01-1.98 1.61H6.66a2 2 0 01-1.98-1.61L3 3zm0 0l1.68 9.39a2 2 001.98 1.61h10.68a2 2 001.98-1.61L21 3M5 21h14"
               ></path>
             </svg>
             <span className="text-yellow-500">0</span>
@@ -64,25 +71,24 @@ const Navbar = () => {
       {/* Bottom Navbar */}
       <div className="bg-white  border-b-[2px] flex items-center space-x-8">
         <div className=" border-r-[3px] p-2 pr-16">
-            <button className="flex items-center space-x-1 text-zinc-700">
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6h16M4 12h16m-7 6h7"
-            ></path>
-          </svg>
-          <span>All Categories</span>
-        </button>  
+          <button onClick={handleNavigate} className="flex items-center space-x-1 text-zinc-700">
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+              ></path>
+            </svg>
+            <span>All Categories</span>
+          </button>
         </div>
-     
         <a href="#" className="text-zinc-700">
           Ready To Cook
         </a>
