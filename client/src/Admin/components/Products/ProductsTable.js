@@ -1,130 +1,99 @@
-import React, { useState } from 'react';
-import Pagination from '@mui/material/Pagination';
-import { Box, Typography, TextField, MenuItem } from '@mui/material';
+import React from 'react';
 
-// Dummy grocery products with images
-const products = [
-  { id: 1, title: 'Apple', category: 'Fruits', price: 2.5, quantity: 50, image: 'https://img.freepik.com/free-psd/red-fresh-apple-isolated-con-transparent-background_125540-5172.jpg?size=626&ext=jpg&ga=GA1.1.1141335507.1718236800&semt=ais_user' },
-  { id: 2, title: 'Banana', category: 'Fruits', price: 1.5, quantity: 70, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcHvuo427ZibCmrJqhMEv_trKmC9wrnT0piw&s' },
-  { id: 3, title: 'Carrot', category: 'Vegetables', price: 3, quantity: 30, image: '/images/carrot.jpg' },
-  { id: 4, title: 'Broccoli', category: 'Vegetables', price: 4, quantity: 20, image: '/images/broccoli.jpg' },
-  { id: 5, title: 'Milk', category: 'Dairy', price: 2, quantity: 100, image: '/images/milk.jpg' },
-  { id: 6, title: 'Eggs', category: 'Dairy', price: 3.5, quantity: 80, image: '/images/eggs.jpg' },
-  { id: 7, title: 'Chicken', category: 'Meat', price: 10, quantity: 15, image: '/images/chicken.jpg' },
-  { id: 8, title: 'Salmon', category: 'Seafood', price: 15, quantity: 10, image: '/images/salmon.jpg' },
-  { id: 9, title: 'Bread', category: 'Bakery', price: 2.5, quantity: 60, image: '/images/bread.jpg' },
-  { id: 10, title: 'Cheese', category: 'Dairy', price: 5, quantity: 40, image: '/images/cheese.jpg' },
-];
+const inputClasses = "border border-input rounded p-1";
+const buttonClasses = "p-2 border border-border rounded";
+const textClasses = "text-xs text-gray-600";
+const hoverClasses = "hover:bg-gray-100 ";
+const destructiveClasses = "text-destructive";
+const primaryClasses = "bg-primary text-primary-foreground";
+const accentClasses = "text-accent";
 
-const categories = [...new Set(products.map((product) => product.category))];
-
-const ProductsTable = () => {
-  const [page, setPage] = useState(1);
-  const [search, setSearch] = useState('');
-  const [filterCategory, setFilterCategory] = useState('');
-  const [filterPrice, setFilterPrice] = useState('');
-  const itemsPerPage = 10;
-
-  const handleChangePage = (event, value) => {
-    setPage(value);
-  };
-
-  const handleSearchChange = (event) => {
-    setSearch(event.target.value);
-  };
-
-  const handleCategoryChange = (event) => {
-    setFilterCategory(event.target.value);
-  };
-
-  const handlePriceChange = (event) => {
-    setFilterPrice(event.target.value);
-  };
-
-  const filteredProducts = products
-    .filter((product) => product.title.toLowerCase().includes(search.toLowerCase()))
-    .filter((product) => !filterCategory || product.category === filterCategory)
-    .filter((product) => !filterPrice || product.price <= filterPrice);
-
-  const displayProducts = filteredProducts.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+const ProductTable = () => {
+  // Dummy data for products
+  const products = [
+    {
+      id: 1,
+      name: 'DogFood, Chicken & Cheese Liver Recipe',
+      productId: '#778392',
+      price: '$1,629.50',
+      quantity: 20,
+      sale: 20,
+      stock: 'Out of Stock',
+      startDate: '01/01/2023'
+    },
+    {
+      id: 2,
+      name: 'CatFood, Salmon & Tuna Recipe',
+      productId: '#778393',
+      price: '$1,329.00',
+      quantity: 15,
+      sale: 10,
+      stock: 'In Stock',
+      startDate: '02/15/2023'
+    },
+    // Add more dummy data as needed
+  ];
 
   return (
-    <Box className="flex flex-col h-screen p-4 bg-white"sx={{ borderRadius: "5px", }} >
-      <Typography variant="h4" component="h1" className="text-center mb-6 text-black-600" sx={{ letterSpacing: ".25px", fontWeight: "bold", fontFamily: "sans-serif", mt:2 }}>
-        Product List
-      </Typography>
-      <Box className="mb-4 p-4  rounded-lg flex flex-col md:flex-row justify-between items-center gap-4">
-        <TextField
-          label="Search"
-          variant="outlined"
-          value={search}
-          onChange={handleSearchChange}
-          className="w-full md:w-1/3"
-          style={{ backgroundColor: '#f0f0f0' }}
-        />
-        <TextField
-          label="Category"
-          variant="outlined"
-          select
-          value={filterCategory}
-          onChange={handleCategoryChange}
-          className="w-full md:w-1/3"
-          style={{ backgroundColor: '#f0f0f0' }}
-        >
-          <MenuItem value="">All</MenuItem>
-          {categories.map((category) => (
-            <MenuItem key={category} value={category}>
-              {category}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          label="Max Price"
-          variant="outlined"
-          type="number"
-          value={filterPrice}
-          onChange={handlePriceChange}
-          className="w-full md:w-1/3"
-          style={{ backgroundColor: '#f0f0f0' }}
-        />
-      </Box>
-      <Box className="flex-1 overflow-y-auto " sx={{ borderRadius: "5px" }}>
-        <table className="min-w-full border-collapse block md:table bg-white shadow-lg rounded-lg" >
-          <thead className="block md:table-header-group bg-green-600" >
-            <tr className="md:table-row">
-              <th className="p-4 text-white font-semibold text-left block md:table-cell">Title</th>
-              <th className="p-4 text-white font-semibold text-left block md:table-cell">Category</th>
-              <th className="p-4 text-white font-semibold text-left block md:table-cell">Price</th>
-              <th className="p-4 text-white font-semibold text-left block md:table-cell">Quantity</th>
-              <th className="p-4 text-white font-semibold text-left block md:table-cell">Image</th>
+    <div className='my-8 mx-4 h-screen'>
+      <div className="p-4 bg-white rounded-lg">
+      <div className="flex justify-between items-center mb-12">
+        <div className="flex items-center space-x-2">
+          <span className={textClasses}>Showing</span>
+          <input type="text" className={inputClasses} placeholder="10" />
+          <span className={textClasses}>entries</span>
+        </div>
+        <div className="flex items-center space-x-2">
+          <input type="text" className={inputClasses} placeholder="Search here..." />
+          <button className={buttonClasses + " " + primaryClasses}>Search</button>
+        </div>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white border border-border">
+          <thead className={textClasses + " bg-gray-400 text-white"}>
+            <tr>
+              <th className="p-2 border-b border-border">Product</th>
+              <th className="p-2 border-b border-border">Product ID</th>
+              <th className="p-2 border-b border-border">Price</th>
+              <th className="p-2 border-b border-border">Quantity</th>
+              <th className="p-2 border-b border-border">Sale</th>
+              <th className="p-2 border-b border-border">Stock</th>
+              <th className="p-2 border-b border-border">Start Date</th>
+              <th className="p-2 border-b border-border">Action</th>
             </tr>
           </thead>
-          <tbody className="block md:table-row-group">
-            {displayProducts.map((product) => (
-              <tr key={product.id} className="bg-white border-b border-gray-200 md:border-none block md:table-row hover:bg-gray-50">
-                <td className="p-4 md:border md:border-gray-200 text-left block md:table-cell">{product.title}</td>
-                <td className="p-4 md:border md:border-gray-200 text-left block md:table-cell">{product.category}</td>
-                <td className="p-4 md:border md:border-gray-200 text-left block md:table-cell">${product.price}</td>
-                <td className="p-4 md:border md:border-gray-200 text-left block md:table-cell">{product.quantity}</td>
-                <td className="p-4 md:border md:border-gray-200 text-left block md:table-cell">
-                  <img src={product.image} alt={product.title} className="h-10 w-10 object-cover rounded-full" />
+          <tbody>
+            {products.map(product => (
+              <tr key={product.id} className={hoverClasses}>
+                <td className="p-4 border-b border-border">{product.name}</td>
+                <td className="p-2 border-b border-border">{product.productId}</td>
+                <td className="p-2 border-b border-border">{product.price}</td>
+                <td className="p-2 border-b border-border">{product.quantity}</td>
+                <td className="p-2 border-b border-border">{product.sale}</td>
+                <td className={"p-2 border-b border-border " + (product.stock === 'Out of Stock' ? destructiveClasses : '')}>{product.stock}</td>
+                <td className="p-2 border-b border-border">{product.startDate}</td>
+                <td className="p-2 border-b border-border">
+                  <button className={accentClasses + " hover:underline"}>View</button>
+                  <button className={accentClasses + " hover:underline"}>Edit</button>
+                  <button className={destructiveClasses + " hover:underline"}>Delete</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-      </Box>
-      <Box className="flex justify-center mt-6">
-        <Pagination
-          count={Math.ceil(filteredProducts.length / itemsPerPage)}
-          page={page}
-          onChange={handleChangePage}
-          variant="outlined"
-          color="primary"
-        />
-      </Box>
-    </Box>
+      </div>
+      <div className="flex justify-between items-center mt-4">
+        <span className={textClasses}>Showing 1 to 10 of {products.length} entries</span>
+        <div className="flex items-center space-x-2">
+          {Array.from({ length: Math.ceil(products.length / 10) }, (_, index) => (
+            <button key={index} className={buttonClasses}>{index + 1}</button>
+          ))}
+        </div>
+      </div>
+    </div>
+    </div>
+    
   );
 };
 
-export default ProductsTable;
+export default ProductTable;

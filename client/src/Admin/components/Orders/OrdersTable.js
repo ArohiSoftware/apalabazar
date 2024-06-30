@@ -1,258 +1,118 @@
-import React, { useState } from 'react';
-import { Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TableSortLabel, Avatar, TextField, MenuItem, Pagination, FormControl, Select, Button, IconButton } from '@mui/material';
+import React from 'react';
 
-import EditIcon from '@mui/icons-material/Edit';
-
-// Dummy data for orders
-const orders = [
-  { orderId: 1, orderName: 'Order 1', orderQuantity: 2, orderPrice: 50, customerId: 1, status: 'Pending' },
-  { orderId: 2, orderName: 'Order 2', orderQuantity: 1, orderPrice: 30, customerId: 2, status: 'Delivered' },
-  { orderId: 3, orderName: 'Order 3', orderQuantity: 3, orderPrice: 80, customerId: 3, status: 'Processing' },
-  { orderId: 4, orderName: 'Order 4', orderQuantity: 1, orderPrice: 20, customerId: 4, status: 'Cancelled' },
-  { orderId: 5, orderName: 'Order 5', orderQuantity: 2, orderPrice: 60, customerId: 5, status: 'Delivered' },
-  // Add more orders as needed
-];
-
-// Dummy data for customers
-const customers = [
-  { id: 1, name: 'John Doe', image: '/images/john.jpg', address: '123 Main St, Anytown', mobile: '123-456-7890' },
-  { id: 2, name: 'Jane Smith', image: '/images/jane.jpg', address: '456 Elm St, Othertown', mobile: '987-654-3210' },
-  { id: 3, name: 'Alice Johnson', image: '/images/alice.jpg', address: '789 Oak Ave, Another Town', mobile: '555-123-4567' },
-  { id: 4, name: 'Michael Brown', image: '/images/michael.jpg', address: '567 Pine Rd, New City', mobile: '222-333-4444' },
-  { id: 5, name: 'Sarah Adams', image: '/images/sarah.jpg', address: '890 Cedar Ln, Nearby City', mobile: '777-888-9999' },
-  // Add more customers as needed
-];
+const sharedClasses = {
+  primaryButton: 'bg-primary border-[2px] border-gray-600 text-primary-foreground px-4 py-2 rounded-lg flex items-center',
+  tableCell: 'p-4 text-left',
+  actionButton: 'text-blue-500 px-2',
+  editButton: 'text-green-500',
+  deleteButton: 'text-red-500 px-2',
+};
 
 const OrdersTable = () => {
-
-  const [page, setPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortBy, setSortBy] = useState(null);
-  const [sortOrder, setSortOrder] = useState('asc');
-  const [maxPrice, setMaxPrice] = useState('');
-  const [selectedOrders, setSelectedOrders] = useState([]);
-  const [statusToUpdate, setStatusToUpdate] = useState('');
-
-  const itemsPerPage = 5; // Adjust the number of orders per page here
-
-  const handleChangePage = (event, value) => {
-    setPage(value);
-  };
-
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-    setPage(1); // Reset page to 1 when search term changes
-  };
-
-  const handleSort = (property) => {
-    const isAsc = sortBy === property && sortOrder === 'asc';
-    setSortBy(property);
-    setSortOrder(isAsc ? 'desc' : 'asc');
-  };
-
-  const handleMaxPriceChange = (event) => {
-    setMaxPrice(event.target.value);
-    setPage(1); // Reset page to 1 when max price filter changes
-  };
-
-  const handleOrderSelection = (orderId) => {
-    const selectedIndex = selectedOrders.indexOf(orderId);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selectedOrders, orderId);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selectedOrders.slice(1));
-    } else if (selectedIndex === selectedOrders.length - 1) {
-      newSelected = newSelected.concat(selectedOrders.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selectedOrders.slice(0, selectedIndex),
-        selectedOrders.slice(selectedIndex + 1)
-      );
-    }
-
-    setSelectedOrders(newSelected);
-  };
-
-  const handleStatusChange = (event) => {
-    setStatusToUpdate(event.target.value);
-  };
-
-  const updateStatus = () => {
-    // Implement logic to update status of selected orders
-    console.log(`Updating status of selected orders to ${statusToUpdate}`);
-    // Clear selected orders after updating
-    setSelectedOrders([]);
-    setStatusToUpdate('');
-  };
-
-  const filteredOrders = orders.filter((order) =>
-    order.orderName.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (maxPrice === '' || order.orderPrice <= parseInt(maxPrice))
-  );
-
-  const sortedOrders = sortBy ? filteredOrders.sort((a, b) => {
-    const comparator = (a, b) => {
-      if (a < b) return -1;
-      if (a > b) return 1;
-      return 0;
-    };
-    const order = sortOrder === 'asc' ? 1 : -1;
-    return order * comparator(a[sortBy], b[sortBy]);
-  }) : filteredOrders;
-
-  const displayOrders = sortedOrders.slice((page - 1) * itemsPerPage, page * itemsPerPage);
-
   return (
-    <Box className="flex flex-col items-center p-4 bg-gray-100" sx={{ borderRadius: "5px" }}>
-      <Typography variant="h4" component="h1" className="mb-6 text-black-600" sx={{ letterSpacing: ".25px", fontWeight: "bold", fontFamily: "sans-serif", mt: 2 }}>
-        Orders Table
-      </Typography>
-      <Box className="mb-4 p-4 bg-white shadow-md rounded-lg flex flex-col md:flex-row justify-between items-center gap-4 w-full md:w-3/4">
-        <TextField
-          label="Search Order"
-          variant="outlined"
-          value={searchTerm}
-          onChange={handleSearchChange}
-          className="w-full md:w-1/2 md:mb-0 mb-4"
-          InputProps={{ classes: { input: 'h-8' } }} // Custom height for input field
-        />
-        <TextField
-          select
-          label="Max Price"
-          variant="outlined"
-          value={maxPrice}
-          onChange={handleMaxPriceChange}
-          className="w-full md:w-1/2"
-          InputProps={{ classes: { input: 'h-8' } }} // Custom height for input field
-        >
-          <MenuItem value="">No Max Price</MenuItem>
-          <MenuItem value="50">$50</MenuItem>
-          <MenuItem value="100">$100</MenuItem>
-          <MenuItem value="200">$200</MenuItem>
-          <MenuItem value="500">$500</MenuItem>
-        </TextField>
-      </Box>
-      <Box className="flex-1 overflow-y-auto " sx={{ borderRadius: "5px" }}>
-        <TableContainer component={Paper} className="w-full md:w-3/4">
-          <Table>
-            <TableHead>
-              <TableRow className="bg-green-600 ">
-                <TableCell className="p-4 text-left" sx={{ color: "White", fontWeight: "bold", }}>
-                  <TableSortLabel
-                    active={sortBy === 'orderId'}
-                    direction={sortBy === 'orderId' ? sortOrder : 'asc'}
-                    onClick={() => handleSort('orderId')}
-                  >
-                    Order ID
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell className="p-4 text-left" sx={{ color: "White", fontWeight: "bold", }}>
-                  <TableSortLabel
-                    active={sortBy === 'orderName'}
-                    direction={sortBy === 'orderName' ? sortOrder : 'asc'}
-                    onClick={() => handleSort('orderName')}
-                  >
-                    Order Name
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell className="p-4 text-left" sx={{ color: "White", fontWeight: "bold", }}>
-                  <TableSortLabel
-                    active={sortBy === 'orderQuantity'}
-                    direction={sortBy === 'orderQuantity' ? sortOrder : 'asc'}
-                    onClick={() => handleSort('orderQuantity')}
-                  >
-                    Order Quantity
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell className="p-4 text-left" sx={{ color: "White", fontWeight: "bold", }}>
-                  <TableSortLabel
-                    active={sortBy === 'orderPrice'}
-                    direction={sortBy === 'orderPrice' ? sortOrder : 'asc'}
-                    onClick={() => handleSort('orderPrice')}
-                  >
-                    Order Price ($)
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell className="p-4 text-left" sx={{ color: "White", fontWeight: "bold", }}>Customer Details</TableCell>
-                <TableCell className="p-4 text-left" sx={{ color: "White", fontWeight: "bold", }}>
-                  <TableSortLabel
-                    active={sortBy === 'status'}
-                    direction={sortBy === 'status' ? sortOrder : 'asc'}
-                    onClick={() => handleSort('status')}
-                  >
-                    Order Status
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell className="p-4 text-left" sx={{ color: "White", fontWeight: "bold", }}>Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {displayOrders.map((order) => (
-                <TableRow key={order.orderId} className="hover:bg-gray-50">
-                  <TableCell className="p-4 text-left">{order.orderId}</TableCell>
-                  <TableCell className="p-4 text-left">{order.orderName}</TableCell>
-                  <TableCell className="p-4 text-left">{order.orderQuantity}</TableCell>
-                  <TableCell className="p-4 text-left">${order.orderPrice}</TableCell>
-                  <TableCell className="p-4 text-left">
-                    <div className="flex items-center">
-                      <Avatar alt={customers.find((customer) => customer.id === order.customerId)?.name} src={customers.find((customer) => customer.id === order.customerId)?.image} />
-                      <div className="ml-2">
-                        <Typography variant="subtitle2">{customers.find((customer) => customer.id === order.customerId)?.name}</Typography>
-                        <Typography variant="body2">{customers.find((customer) => customer.id === order.customerId)?.address}</Typography>
-                      </div>
-                    </div>
-                  </TableCell>
-                  <TableCell className="p-4 text-left">{order.status}</TableCell>
-                  <TableCell className="p-4 text-left">
-                    <IconButton
-                      aria-label="edit"
-                      onClick={() => handleOrderSelection(order.orderId)}
-                      className={selectedOrders.includes(order.orderId) ? 'text-blue-500' : ''}
-                    >
-                      <EditIcon />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Box>
-      <Box className="mt-4 flex items-center justify-between w-full md:w-3/4">
-        <Pagination count={Math.ceil(filteredOrders.length / itemsPerPage)} page={page} onChange={handleChangePage} color="primary" />
-        {selectedOrders.length > 0 && (
-          <FormControl variant="outlined">
-            <Select
-              value={statusToUpdate}
-              onChange={handleStatusChange}
-              displayEmpty
-              className="p-1"
-              inputProps={{ 'aria-label': 'Select Status' }}
-            >
-              <MenuItem value="" disabled>
-                Select Status
-              </MenuItem>
-              <MenuItem value="Pending">Pending</MenuItem>
-              <MenuItem value="Processing">Processing</MenuItem>
-              <MenuItem value="Delivered">Delivered</MenuItem>
-              <MenuItem value="Cancelled">Cancelled</MenuItem>
-            </Select>
-          </FormControl>
-        )}
-        {selectedOrders.length > 0 && (
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={updateStatus}
-            className="ml-4"
-          >
-            Update Status
-          </Button>
-        )}
-      </Box>
-    </Box>
+    <div className="p-4 bg-white mx-5 my-8 rounded-lg text-card-foreground">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-semibold">Order List</h1>
+        <button className={sharedClasses.primaryButton}>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 17l4 4 4-4m-4-5v9" />
+          </svg>
+          Export all orders
+        </button>
+      </div>
+      <div className="mb-16">
+        <input type="text" placeholder="Search here..." className="w-full p-2 border rounded-lg bg-input text-foreground" />
+      </div>
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white border  rounded-lg">
+          <thead>
+            <tr className="bg-gray-300  text-secondary-foreground">
+              <th className={sharedClasses.tableCell}>Product</th>
+              <th className={sharedClasses.tableCell}>Order ID</th>
+              <th className={sharedClasses.tableCell}>Price</th>
+              <th className={sharedClasses.tableCell}>Quantity</th>
+              <th className={sharedClasses.tableCell}>Payment</th>
+              <th className={sharedClasses.tableCell}>Status</th>
+              <th className={sharedClasses.tableCell}>Tracking</th>
+              <th className={sharedClasses.tableCell}>Action</th>
+            </tr>
+          </thead>
+          <tbody >
+            {[
+              {
+                product: "Kristin Watson",
+                orderId: "#7712309",
+                price: "$1,452.50",
+                quantity: "1,638",
+                payment: "$20",
+                status: "Success",
+                image: "https://placehold.co/40x40",
+              },
+              {
+                product: "Cameron Williamson",
+                orderId: "#7712310",
+                price: "$2,300.00",
+                quantity: "500",
+                payment: "$30",
+                status: "Pending",
+                image: "https://placehold.co/40x40",
+              },
+              {
+                product: "Jane Cooper",
+                orderId: "#7712311",
+                price: "$600.00",
+                quantity: "100",
+                payment: "$10",
+                status: "Failed",
+                image: "https://placehold.co/40x40",
+              },
+            ].map((order, index) => (
+              <tr key={index} className="border-t hover:bg-gray-100 transition duration-200">
+                <td className={sharedClasses.tableCell}>
+                  <div className="flex items-center space-x-2">
+                    <img src={order.image} alt="product" className="w-10 h-10 rounded-full" />
+                    <span>{order.product}</span>
+                  </div>
+                </td>
+                <td className={sharedClasses.tableCell}>{order.orderId}</td>
+                <td className={sharedClasses.tableCell}>{order.price}</td>
+                <td className={sharedClasses.tableCell}>{order.quantity}</td>
+                <td className={sharedClasses.tableCell}>{order.payment}</td>
+                <td className={sharedClasses.tableCell}>{order.status}</td>
+                <td className={sharedClasses.tableCell}>
+                  <button className="bg-accent text-accent-foreground px-2 py-1 rounded">Track</button>
+                </td>
+                <td className={sharedClasses.tableCell}>
+                  <button className={sharedClasses.actionButton}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.55 4.55a2.5 2.5 0 01-3.6 3.6L11 14.6V10h4zM4 4a2 2 0 100 4 2 2 0 100-4zm0 12a2 2 0 100 4 2 2 0 100-4zm12 4a2 2 0 100 4 2 2 0 100-4zm0-16a2 2 0 100 4 2 2 0 100-4z" />
+                    </svg>
+                  </button>
+                  <button className={sharedClasses.editButton}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 4.232a1.5 1.5 0 012.122 0l1.768 1.768a1.5 1.5 0 010 2.122l-10 10a1.5 1.5 0 01-.667.384l-5 1.5a.5.5 0 01-.632-.632l1.5-5a1.5 1.5 0 01.384-.667l10-10z" />
+                    </svg>
+                  </button>
+                  <button className={sharedClasses.deleteButton}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.136 21H7.864a2 2 0 01-1.997-1.858L5 7m5-3V3h4v1m4 0H6m13 0a2 2 0 00-2-2h-1a2 2 0 00-2-2h-4a2 2 0 00-2 2H5a2 2 0 00-2 2h16z" />
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="flex justify-between items-center mt-12">
+        <span className='text-xs'>Showing 3 entries</span>
+        <div className="flex space-x-2">
+          <button className="px-3 py-1 border rounded-lg">1</button>
+          <button className="px-3 py-1 border rounded-lg bg-primary text-primary-foreground">2</button>
+          <button className="px-3 py-1 border rounded-lg">3</button>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import logo from './veg-logo.svg'
-import {ProductCard  } from '../../../customer/Components/Product/ProductCard/ProductCard'
+import ProductCard from '../../../customer/Components/Products/Cards'
 
 import ashirvaadatta from '../Flours/aashirvaad-sugar-release-control-atta-img.webp'
 import chanabesan from '../Flours/chana-dalfine-besan-img.webp'
@@ -22,178 +22,194 @@ export function Flours({activeSubTab}) {
 
 const FloursData = [
   {
-    productname:"Sugar Release Control Atta" ,
-    productimg: ashirvaadatta ,
-    productprice:"₹385" ,
-    aplabazarprice:"₹338",
-    offprice:"₹12",
-    quantity:"5 kg",
-    logo : logo,
+     id: 10,
+  name: "Sugar Release Control Atta" ,
+     image: ashirvaadatta ,
+    mrp:"₹385" ,
+    price:"₹338",
+   discount:"12",
+    weight:"5 kg",
+     url: `/product/${"Mccain Smiles".replace(/ /g, "-").toLowerCase()}`,
+
   },
 
 
   {
-    productname:"Fine Besan-100% Chana Dal" ,
-    productimg: chanabesan ,
-    productprice:"₹149" ,
-    aplabazarprice:"₹111",
-    offprice:"₹26",
-    quantity:"1 kg",
-    logo : logo,
+     id: 10,
+  name: "Fine Besan-100% Chana Dal" ,
+     image: chanabesan ,
+    mrp:"₹149" ,
+    price:"₹111",
+   discount:"26",
+    weight:"1 kg",
+     url: `/product/${"Mccain Smiles".replace(/ /g, "-").toLowerCase()}`,
+
   },
 
 
   {
-    productname:"Corn Flour/Starch" ,
-    productimg: cornflour ,
-    productprice:"₹50" ,
-    aplabazarprice:"₹41",
-    offprice:"₹18",
-    quantity:"500 g",
-    logo : logo,
+     id: 10,
+  name: "Corn Flour/Starch" ,
+     image: cornflour ,
+    mrp:"₹50" ,
+    price:"₹41",
+   discount:"18",
+    weight:"500 g",
+     url: `/product/${"Mccain Smiles".replace(/ /g, "-").toLowerCase()}`,
+
   },
 
   {
-    productname:"Chakki Frersh Atta " ,
-    productimg: attachakki,
-    productprice:"₹85" ,
-    aplabazarprice:"₹61",
-    offprice:"₹27",
-    quantity:"1 kg",
-    logo : logo,
-  },
+     id: 10,
+  name: "Chakki Frersh Atta " ,
+     image: attachakki,
+    mrp:"₹85" ,
+    price:"₹61",
+   discount:"27",
+    weight:"1 kg",
+     url: `/product/${"Mccain Smiles".replace(/ /g, "-").toLowerCase()}`,
 
-
-
-  {
-    productname:"Maida/Refine Flour" ,
-    productimg: fortunemaida ,
-    productprice:"₹50" ,
-    aplabazarprice:"₹39",
-    offprice:"₹9",
-    quantity:"500 g",
-    logo : logo,
-  },
-
-
-  {
-    productname:"Organic-Bajra Atta" ,
-    productimg: bajraatta ,
-    productprice:"₹50" ,
-    aplabazarprice:"₹40",
-    offprice:"₹10",
-    quantity:"500 g",
-    logo : logo,
   },
 
 
 
   {
-    productname:"Sesame Oil" ,
-    productimg: brownrice ,
-    productprice:"₹625" ,
-    aplabazarprice:"₹625",
-    offprice:"₹19",
-    quantity:"1 L",
-    logo : logo,
+     id: 10,
+  name: "Maida/Refine Flour" ,
+     image: fortunemaida ,
+    mrp:"₹50" ,
+    price:"₹39",
+   discount:"9",
+    weight:"500 g",
+     url: `/product/${"Mccain Smiles".replace(/ /g, "-").toLowerCase()}`,
+
+  },
+
+
+  {
+     id: 10,
+  name: "Organic-Bajra Atta" ,
+     image: bajraatta ,
+    mrp:"₹50" ,
+    price:"₹40",
+   discount:"10",
+    weight:"500 g",
+     url: `/product/${"Mccain Smiles".replace(/ /g, "-").toLowerCase()}`,
+
   },
 
 
 
   {
-    productname:"Total Balance Oil & Soyabean Oil" ,
-    productimg: jowarflour ,
-    productprice:"₹160" ,
-    aplabazarprice:"₹139",
-    offprice:"₹13",
-    quantity:"1 L",
-    logo : logo,
+     id: 10,
+  name: "Sesame Oil" ,
+     image: brownrice ,
+    mrp:"₹625" ,
+    price:"₹625",
+   discount:"19",
+    weight:"1 L",
+     url: `/product/${"Mccain Smiles".replace(/ /g, "-").toLowerCase()}`,
+
+  },
+
+
+
+  {
+     id: 10,
+  name: "Total Balance Oil & Soyabean Oil" ,
+     image: jowarflour ,
+    mrp:"₹160" ,
+    price:"₹139",
+   discount:"13",
+    weight:"1 L",
+     url: `/product/${"Mccain Smiles".replace(/ /g, "-").toLowerCase()}`,
+
   },
 
   
   {
-    productname:"Total Balance Oil & Soyabean Oil" ,
-    productimg: maize,
-    productprice:"₹160" ,
-    aplabazarprice:"₹139",
-    offprice:"₹13",
-    quantity:"1 L",
-    logo : logo,
+     id: 10,
+  name: "Total Balance Oil & Soyabean Oil" ,
+     image: maize,
+    mrp:"₹160" ,
+    price:"₹139",
+   discount:"13",
+    weight:"1 L",
+     url: `/product/${"Mccain Smiles".replace(/ /g, "-").toLowerCase()}`,
+
   },
 
 
   {
-    productname:"Total Balance Oil & Soyabean Oil" ,
-    productimg: sattuatta ,
-    productprice:"₹160" ,
-    aplabazarprice:"₹139",
-    offprice:"₹13",
-    quantity:"1 L",
-    logo : logo,
+     id: 10,
+  name: "Total Balance Oil & Soyabean Oil" ,
+     image: sattuatta ,
+    mrp:"₹160" ,
+    price:"₹139",
+   discount:"13",
+    weight:"1 L",
+     url: `/product/${"Mccain Smiles".replace(/ /g, "-").toLowerCase()}`,
+
   },
 
 
   {
-    productname:"Total Balance Oil & Soyabean Oil" ,
-    productimg: soojirawa ,
-    productprice:"₹160" ,
-    aplabazarprice:"₹139",
-    offprice:"₹13",
-    quantity:"1 L",
-    logo : logo,
+     id: 10,
+  name: "Total Balance Oil & Soyabean Oil" ,
+     image: soojirawa ,
+    mrp:"₹160" ,
+    price:"₹139",
+   discount:"13",
+    weight:"1 L",
+     url: `/product/${"Mccain Smiles".replace(/ /g, "-").toLowerCase()}`,
+
   },
 
 
 
   {
-    productname:"Total Balance Oil & Soyabean Oil" ,
-    productimg: brokenwheat ,
-    productprice:"₹160" ,
-    aplabazarprice:"₹139",
-    offprice:"₹13",
-    quantity:"1 L",
-    logo : logo,
+     id: 10,
+  name: "Total Balance Oil & Soyabean Oil" ,
+     image: brokenwheat ,
+    mrp:"₹160" ,
+    price:"₹139",
+   discount:"13",
+    weight:"1 L",
+     url: `/product/${"Mccain Smiles".replace(/ /g, "-").toLowerCase()}`,
+
   },
 
   {
-    productname:"Total Balance Oil & Soyabean Oil" ,
-    productimg: readymixragi,
-    productprice:"₹160" ,
-    aplabazarprice:"₹139",
-    offprice:"₹13",
-    quantity:"1 L",
-    logo : logo,
+     id: 10,
+  name: "Total Balance Oil & Soyabean Oil" ,
+     image: readymixragi,
+    mrp:"₹160" ,
+    price:"₹139",
+   discount:"13",
+    weight:"1 L",
+     url: `/product/${"Mccain Smiles".replace(/ /g, "-").toLowerCase()}`,
+
   },
 
   {
-    productname:"Total Balance Oil & Soyabean Oil" ,
-    productimg: riceflour,
-    productprice:"₹160" ,
-    aplabazarprice:"₹139",
-    offprice:"₹13",
-    quantity:"1 L",
-    logo : logo,
-  },
+     id: 10,
+  name: "Total Balance Oil & Soyabean Oil" ,
+     image: riceflour,
+    mrp:"₹160" ,
+    price:"₹139",
+   discount:"13",
+    weight:"1 L",
+     url: `/product/${"Mccain Smiles".replace(/ /g, "-").toLowerCase()}`,
 
+  }
 ];
 
 return(
 
-<div className='flex  flex-wrap w-full'>
-
-{
-
-  FloursData.map(
-    (data) => {
-    
-  return (
-    
-     <ProductCard  productname={data.productname} productimg={data.productimg} productprice={data.productprice} aplabazarprice={data.aplabazarprice} offprice={data.offprice} quantity={data.quantity} logo={data.logo} />
-  )
-}
-  )
-}
-
+  <div className=" mt-[12.5vh] cookingoilcards border w-full flex flex-wrap gap-9 ">
+    {FloursData.map((product, index) => (
+      <ProductCard key={index} product={product} />
+    ))}
 </div>
     
   )

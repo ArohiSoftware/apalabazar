@@ -1,3 +1,23 @@
 .radius{
     border-radius: 20px;
 }
+
+/* MySlider.css */
+
+/* Customize dots */
+.slick-dots {
+    @apply flex justify-center mt-4; /* Center align the dots and add margin-top */
+  }
+  
+  .slick-dots li {
+    @apply mx-1; /* Margin between dots */
+  }
+  
+  .slick-dots li button:before {
+    @apply text-xs text-gray-500; /* Adjust the size and color of the dots */
+  }
+  
+  .slick-dots li.slick-active button:before {
+    @apply text-gray-800; /* Adjust the color of the active dot */
+  }
+  

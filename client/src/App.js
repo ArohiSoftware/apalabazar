@@ -13,10 +13,17 @@ function App() {
   return (
     <div className="App">
       <Routes>
+<<<<<<< HEAD
         <Route path="/*" element={<CustomersRoute />} />{" "}
         <Route path="/admin/*" element={<AdminRouters />} />{" "}
         <Route path="/myprofile/*" element={<MyprofileRouters />} />
       </Routes>{" "}
+=======
+        <Route path="/*" element={<CustomersRoute />} />
+        <Route path="/admin/*" element={<AdminRouters />} />
+        <Route path= "/myprofile/*" element={<MyprofileRouters/>}  />
+      </Routes>
+>>>>>>> 9a91febc2b63b1ca810ab34af7bda8b8eac19e0a
     </div>
   );
 }

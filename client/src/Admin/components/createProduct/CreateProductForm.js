@@ -1,177 +1,84 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+const inputClasses = "mt-1 block w-full p-2 border border-input rounded-md";
+const labelClasses = "block text-sm font-medium text-zinc-700 mb-3";
+const textClasses = "mt-1 text-xs text-muted-foreground";
+const selectClasses = "mt-1 block w-full p-2 border border-input rounded-md";
+const buttonClasses = "px-4 py-2 rounded-md transition duration-150 ease-in-out";
 
 const CreateProductForm = () => {
-  const [formValues, setFormValues] = useState({
-    imageUrl: "",
-    brand: "",
-    title: "",
-    color: "",
-    discountedPrice: "",
-    price: "",
-    discountPersent: "",
-    size: "",
-    quantity: "",
-    topLavelCategory: "",
-    secondLavelCategory: "",
-    thirdLavelCategory: "",
-    description: "",
-  });
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Implement form submission logic here
-    console.log(formValues);
-  };
-
   return (
-    <div className="flex flex-col items-center p-6  min-h-screen">
-
-      <form
-        onSubmit={handleSubmit}
-        className=" bg-green-400 p-8 rounded-lg shadow-2xl w-full max-w-4xl space-y-6"
-      >
-
-        <h1 className="text-2xl text-center font-bold text-grey mb-6" sx={{ letterSpacing: ".25px", fontWeight: "bold", fontFamily: "sans-serif", mt: 2, }}>Add New Product</h1>
-        <div className="w-full">
-          <input
-            type="text"
-            name="imageUrl"
-            placeholder="Image URL"
-            value={formValues.imageUrl}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 hover:shadow-lg"
-          />
-        </div>
-        <div className="flex flex-col md:flex-row md:space-x-4">
-          <div className="w-full">
-            <input
-              type="text"
-              name="brand"
-              placeholder="Brand"
-              value={formValues.brand}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 hover:shadow-lg"
-            />
+    <div className="p-6 bg-card text-card-foreground rounded-lg max-w-9xl mx-auto">
+      <h1 className="text-2xl font-semibold mb-4">Create Grocery Product</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="mb-6">
+            <label htmlFor="product-name" className={labelClasses}>Product Name <span className="text-destructive">*</span></label>
+            <input type="text" id="product-name" className={inputClasses} placeholder="Enter product name" />
+            <p className={textClasses}>Do not exceed 20 characters when entering the product name.</p>
           </div>
-          <div className="w-full">
-            <input
-              type="text"
-              name="title"
-              placeholder="Title"
-              value={formValues.title}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 hover:shadow-lg"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label htmlFor="category" className={labelClasses}>Category <span className="text-destructive">*</span></label>
+              <select id="category" className={selectClasses}>
+                <option>Choose category</option>
+                <option>Vegetables</option>
+                <option>Fruits</option>
+                <option>Dairy</option>
+                <option>Beverages</option>
+                <option>Snacks</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="brand" className={labelClasses}>Brand <span className="text-destructive">*</span></label>
+              <select id="brand" className={selectClasses}>
+                <option>Choose brand</option>
+                <option>Brand A</option>
+                <option>Brand B</option>
+                <option>Brand C</option>
+              </select>
+            </div>
           </div>
-          <div className="w-full">
-            <input
-              type="text"
-              name="color"
-              placeholder="Color"
-              value={formValues.color}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 hover:shadow-lg"
-            />
+          <div className="mb-4">
+            <label htmlFor="description" className={labelClasses}>Description <span className="text-destructive">*</span></label>
+            <textarea id="description" className={inputClasses} rows="4" placeholder="Description"></textarea>
+            <p className={textClasses}>Do not exceed 100 characters when entering the product name.</p>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row md:space-x-4">
-          <div className="w-full">
-            <input
-              type="number"
-              name="discountedPrice"
-              placeholder="Discounted Price"
-              value={formValues.discountedPrice}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 hover:shadow-lg"
-            />
+        
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h2 className="text-lg font-semibold mb-4">Upload Images</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            <img src="https://cdn.dmart.in/images/products/JUN120001408xx11JUN24_5_P.jpg" alt="product-image-1" className="w-full h-full object-cover rounded-md" />
+            <img src="https://cdn.dmart.in/images/products/LReadyMixCTL337xx310521_5_P.jpg" alt="product-image-2" className="w-full h-full object-cover rounded-md" />
+            <div className="flex items-center justify-center border-2 border-dashed border-input rounded-md">
+              <span className="text-muted-foreground">Drop your images here or <a href="#" className="text-primary">click to browse</a></span>
+            </div>
           </div>
-          <div className="w-full">
-            <input
-              type="number"
-              name="price"
-              placeholder="Price"
-              value={formValues.price}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 hover:shadow-lg"
-            />
+          <p className="text-sm text-muted-foreground mb-4">You need to add at least 4 images. Pay attention to the quality of the pictures you add, comply with the background color standards. Pictures must be in certain dimensions. Notice that the product shows all the details.</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label htmlFor="add-size" className={labelClasses}>Size</label>
+              <select id="add-size" className={selectClasses}>
+                <option>500g</option>
+                <option>1kg</option>
+                <option>2kg</option>
+                <option>5kg</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="product-date" className={labelClasses}>Expiry Date</label>
+              <input type="date" id="product-date" className={inputClasses} />
+            </div>
           </div>
-          <div className="w-full">
-            <input
-              type="number"
-              name="discountPersent"
-              placeholder="Discount Percent"
-              value={formValues.discountPersent}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 hover:shadow-lg"
-            />
-          </div>
-        </div>
-        <div className="w-full">
-          <input
-            type="number"
-            name="quantity"
-            placeholder="Quantity"
-            value={formValues.quantity}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 hover:shadow-lg"
-          />
-        </div>
-        <div className="flex flex-col md:flex-row md:space-x-4">
-          <div className="w-full">
-            <input
-              type="text"
-              name="topLavelCategory"
-              placeholder="Top Level Category"
-              value={formValues.topLavelCategory}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 hover:shadow-lg"
-            />
-          </div>
-          <div className="w-full">
-            <input
-              type="text"
-              name="secondLavelCategory"
-              placeholder="Second Level Category"
-              value={formValues.secondLavelCategory}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 hover:shadow-lg"
-            />
-          </div>
-          <div className="w-full">
-            <input
-              type="text"
-              name="thirdLavelCategory"
-              placeholder="Third Level Category"
-              value={formValues.thirdLavelCategory}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 hover:shadow-lg"
-            />
+          <div className="flex justify-end space-x-4 mt-12">
+            <button className={`${buttonClasses} bg-green-500 text-primary-foreground hover:bg-green-600`}>Add Product</button>
+            <button className={`${buttonClasses} bg-orange-500 text-secondary-foreground hover:bg-orange-600`}>Save Product</button>
+            <button className={`${buttonClasses} bg-muted border-[2px] text-muted-foreground hover:border-gray-600`}>Schedule</button>
           </div>
         </div>
-        <div className="w-full">
-          <textarea
-            name="description"
-            placeholder="Description"
-            value={formValues.description}
-            onChange={handleChange}
-            rows="4"
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 hover:shadow-lg"
-          />
-        </div>
-        <div className="flex justify-end">
-          <button
-            type="submit"
-            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 hover:shadow-lg transition duration-200"
-          >
-            Add Product
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 };

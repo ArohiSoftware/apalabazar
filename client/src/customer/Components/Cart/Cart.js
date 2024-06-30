@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../Navbar/Navbar';
 import MobNavBar from '../Navbar/MobileNavbar';
 import { FaCircleInfo } from "react-icons/fa6";
-
+import { useNavigate, useNavigation } from "react-router-dom";
 const CartItem = ({ unik, imageSrc, productName, price, savings, qty, setQty, decreaseQuantity, increaseQuantity, removeItem }) => {
   return (
     <tr className="border-b">
@@ -16,11 +16,11 @@ const CartItem = ({ unik, imageSrc, productName, price, savings, qty, setQty, de
         </div>
       </td>
       <td className="py-4 px-4 text-center">{price}</td>
-      <td className="py-4 px-4 text-center text-green-600">{savings}</td>
+      <td className="py-4 px-4 text-center text-blue-500">{savings}</td>
       <td className="py-4 px-4 text-center">
-        <button className="bg-green-500 text-white px-2 py-1 rounded-l" onClick={() => decreaseQuantity(unik)}>-</button>
+        <button className="bg-blue-500 text-white px-2 py-1 rounded-l" onClick={() => decreaseQuantity(unik)}>-</button>
         <input type="number" value={qty} readOnly min="1" className="w-12 text-center border-t border-b" />
-        <button className="bg-green-500 text-white px-2 py-1 rounded-r" onClick={() => increaseQuantity(unik)}>+</button>
+        <button className="bg-blue-500 text-white px-2 py-1 rounded-r" onClick={() => increaseQuantity(unik)}>+</button>
       </td>
       <td className="py-4 px-4 text-center align-middle">
         <button className="text-red-500" onClick={() => removeItem(unik)}>
@@ -34,7 +34,10 @@ const CartItem = ({ unik, imageSrc, productName, price, savings, qty, setQty, de
 const Cart = () => {
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
-
+  const navigate = useNavigate();
+const checkOut =()=>{
+  navigate('/checkout')
+}
   useEffect(() => {
     async function getItems() {
       const cartItems = await JSON.parse(localStorage.getItem('cart')) || [];
@@ -151,7 +154,7 @@ const Cart = () => {
                 </div>
                 <span className="text-red-500">+ Extra</span>
               </div>
-              <button className="w-full bg-green-500 text-white py-2 rounded-full" onClick={() => alert('Proceed to checkout')}>PROCEED TO CHECKOUT</button>
+              <button className="w-full bg-blue-500 text-white py-2 rounded-full" onClick={checkOut}>PROCEED TO CHECKOUT</button>
             </div>
           </div>
         </div>

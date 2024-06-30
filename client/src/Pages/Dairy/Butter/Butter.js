@@ -1,12 +1,7 @@
 import React from 'react'
 import {ProductCard  } from '../../../customer/Components/Product/ProductCard/ProductCard'
 import './Butter.css'
-
 import logo from './veg-logo.svg'
-
-
-
-
 
 export function Butter() {
 

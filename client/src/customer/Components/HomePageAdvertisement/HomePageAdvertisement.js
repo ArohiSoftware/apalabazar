@@ -1,21 +1,37 @@
 import React from 'react';
 
-const HomePageAdvertisement = () => {
-  const advertisements = [
-    { id: 1, imageUrl: 'https://image.useinsider.com/itcindia/defaultImageLibrary/Frozen%201080-x-1080_desktop%20v2-1717427674.jpeg' },
-    { id: 2, imageUrl: 'https://image.useinsider.com/itcindia/defaultImageLibrary/Bingo%201080-x-1080_T20_desktop%20v2-1717427681.jpeg' },
-    { id: 3, imageUrl: 'https://image.useinsider.com/itcindia/defaultImageLibrary/B%20Natural%201080-x-1080_desktop%20v2-1717427692.jpeg' },
-    { id: 4, imageUrl: 'https://image.useinsider.com/itcindia/defaultImageLibrary/KOI%201080-x-1080_desktop%20v2-1717427698.jpeg' },
-  ];
+const gadgets = [
+  {
+    title: 'True Wireless',
+    discount: 'Min. 50% Off',
+    imageUrl: 'https://cdn.shopify.com/s/files/1/2303/2711/files/2_e822dae0-14df-4cb8-b145-ea4dc0966b34.jpg?v=1617059123',
+  },
+  {
+    title: 'Smart Bands',
+    discount: 'Min. 40% Off',
+    imageUrl: 'https://cdn.shopify.com/s/files/1/2303/2711/files/2_e822dae0-14df-4cb8-b145-ea4dc0966b34.jpg?v=1617059123',
+  },
+  {
+    title: 'Smart Watch Straps',
+    discount: 'Min. 40% Off',
+    imageUrl: 'https://cdn.shopify.com/s/files/1/2303/2711/files/2_e822dae0-14df-4cb8-b145-ea4dc0966b34.jpg?v=1617059123',
+  },
+ 
+];
 
+const Gadgets = () => {
   return (
-    <div className="flex justify-center items-center mt-6 min-h-screen">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-screen-lg px-4">
-        {advertisements.map(ad => (
-          <div key={ad.id} className="advertisement-card p-2 h-96">
-            <div className="bg-white rounded-lg shadow-md overflow-hidden h-full flex justify-center items-center">
-              <img src={ad.imageUrl} alt={`Advertisement ${ad.id}`} className="w-full h-full object-cover" />
-            </div>
+    <div className="p-8 flex flex-col  m-5 bg-white rounded-md">
+      <h2 className="text-2xl font-bold text-center mb-6">Today's Sponsors</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+        {gadgets.map((gadget, index) => (
+          <div key={index} className="bg-white border rounded-lg shadow-lg overflow-hidden">
+            <img
+              src={gadget.imageUrl}
+              alt={gadget.title}
+              className="w-full h-35 sm:h-58 object-cover transform hover:scale-110 transition duration-300"
+            />
+           
           </div>
         ))}
       </div>
@@ -23,4 +39,4 @@ const HomePageAdvertisement = () => {
   );
 };
 
-export default HomePageAdvertisement;
+export default Gadgets;

@@ -7,7 +7,7 @@ function Payment() {
     const [upi, setUpi] = useState('');
     useEffect(()=>{
         setUpi('9823105698@paytm')
-    })
+    },[])
    
     const inputClasses = "mt-1 block w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:text-zinc-100";
     const fileInputClasses = "mt-1 block w-full text-sm text-zinc-500 dark:bg-gray-200 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:dark:bg-gray-600 dark:file:text-zinc-300 dark:hover:file:bg-zinc-600";

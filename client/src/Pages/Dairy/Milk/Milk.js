@@ -3,7 +3,7 @@ import React from 'react'
 import logo from './veg-logo.svg'
 
 
-import {ProductCard  } from '../../../customer/Components/Product/ProductCard/ProductCard'
+import ProductCard from '../../../customer/Components/Products/Cards.js'
 
 
 
@@ -75,7 +75,7 @@ const DryfruitsData = [
 return(
 
 <div className=' flex  flex-wrap w-full  '>
-
+{/* 
 {
   DryfruitsData.map(
     (data) => {
@@ -86,7 +86,11 @@ return(
   )
 }
   )
-}
+} */}
+{DryfruitsData.map((product, index) => (
+          <ProductCard key={index} product={product} />
+        ))}
+
 
 </div>
     
