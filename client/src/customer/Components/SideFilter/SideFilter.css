@@ -1,0 +1,75 @@
+/* SearchBar component styles */
+
+.search-bar-container {
+    margin-bottom: 20px;
+}
+
+.search-input {
+    padding: 8px;
+    width: 100%;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.results-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.results-list li {
+    padding: 8px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+
+/* SideFilter component styles */
+
+.side-filter {
+    width: 250px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.side-filter h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.side-filter select,
+.side-filter input[type="text"],
+.side-filter input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.side-filter input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.side-filter ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.side-filter ul li {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+}

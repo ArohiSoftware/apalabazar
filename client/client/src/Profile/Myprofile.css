@@ -1,0 +1,31 @@
+
+
+.sidebar::-webkit-scrollbar{
+    display: none;
+}
+.MuiDrawer-paper {
+    margin-top: 118px;
+    height: 80vh;
+    
+}
+
+
+.css-1oorxxw {
+    height: 80vh !;
+    
+}
+
+@media (max-width: 1000px) {
+    .css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
+        margin-top: 186px;
+        padding-bottom:100px;
+
+       
+    }
+    .css-1kpoae1-MuiDrawer-docked .MuiDrawer-paper {
+        width:10%!
+    }
+  }
+
+  @media (max-width:1900px) {
+   }

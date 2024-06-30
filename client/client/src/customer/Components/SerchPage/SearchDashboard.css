@@ -1,0 +1,67 @@
+/* Add any necessary styles for the dashboard and search functionality
+.search-container {
+    margin: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-right: 10px;
+    width: 300px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#suggestions {
+    border: 1px solid #ddd;
+    border-top: none;
+    background-color: #fff;
+    max-height: 150px;
+    overflow-y: auto;
+    position: absolute;
+    width: 300px;
+    z-index: 1;
+}
+
+#suggestions div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#suggestions div:hover {
+    background-color: #f1f1f1;
+}
+
+#results-container {
+    margin-top: 20px;
+}
+
+#pagination {
+    margin-top: 20px;
+}
+
+.pagination-button {
+    padding: 10px;
+    margin: 0 5px;
+    border: none;
+    background-color: #2874f0;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.pagination-button:hover {
+    background-color: #1a5bb8;
+} */

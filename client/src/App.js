@@ -1,31 +1,22 @@
-import { Route, Routes } from 'react-router-dom';
-import './App.css';
-import CustomersRoute from './Routers/CustomersRoute';
+// src/App.js
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import AdminRouters from './Routers/AdminRouters';
-
-
-import { useEffect } from 'react';
-import MyprofileRouters from './Routers/MyprofileRouters';
-
-
-
-// import Routers from './Routers/Routers';
+import CustomersRoute from "./Routers/CustomersRoute";
+import AdminRouters from "./Routers/AdminRouters";
+import MyprofileRouters from "./Routers/MyprofileRouters";
 
 function App() {
-  const isAdmin=true;
-
+  // Example: Determine if user is admin (you can use your own logic here)
+  const isAdmin = true;
 
   return (
-    <div className="">
-
+    <div className="App">
       <Routes>
-        <Route path="/*" element={<CustomersRoute />} />
-        <Route path="/admin/*" element={<AdminRouters />} />
-        <Route path= "/myprofile/*" element={<MyprofileRouters/>}  />
-      
-      
-      </Routes>
+        <Route path="/*" element={<CustomersRoute />} />{" "}
+        <Route path="/admin/*" element={<AdminRouters />} />{" "}
+        <Route path="/myprofile/*" element={<MyprofileRouters />} />
+      </Routes>{" "}
     </div>
   );
 }

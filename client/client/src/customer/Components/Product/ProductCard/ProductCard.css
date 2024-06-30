@@ -1,0 +1,102 @@
+   .card {
+       height: 420px;
+       width: 310px;
+       border: 0.01px solid rgb(210, 207, 207);
+       border-radius: 5px;
+       margin: 20px;
+   }
+
+   .box {
+
+       display: inline-block;
+       display: wrap;
+       margin-bottom: 90px;
+
+   }
+
+
+   .logo {
+
+       margin-left: 250px;
+       margin-top: -150px;
+       
+   }
+
+   .imgg {
+       height: 150px;
+       width: 150px;
+       margin-left: 68px;
+       margin-top: 15px;
+       
+       
+   }
+
+   .Product-name {
+       margin-top: -250px;
+       text-align: center;
+       font-family: sans-serif;
+   
+   }
+
+   .mrp {
+       margin-left: 70px;
+       margin-top: -70px;
+       color: #878787;
+   }
+
+   .mrp2 {
+       text-decoration: line-through;
+
+   }
+
+   .mrpp {
+       margin-left: 120px;
+       margin-top: -49px;
+   }
+
+   .mrpp2 {
+       margin-left: 15px;
+   }
+
+   .taxes {
+       font-weight: 100;
+       color: #878787;
+       margin-left: 60px;
+   }
+
+   
+
+   .mrpinfo {
+       margin-top: -20px;
+       margin-bottom: 30px;
+   }
+
+
+   .bttn {
+       height: 33px;
+       width: 265px;
+       text-align: center;
+       font-family: sans-serif;
+       color: white;
+       border-radius: 5px;
+       border: 1px solid #25a541;
+       background-color: #25a541;
+
+   }
+
+
+
+   .price {
+       height: 55px;
+       width: 50px;
+       border: 0.01px solid #b7e6b7;
+       color: rgb(18, 196, 18);
+       font-weight: 500;
+       border-radius: 5px;
+       background-color: #dee8de;
+       font-size: large;
+       margin-left: 250px;
+       text-align: center;
+       margin-top: 80px;
+      
+   }

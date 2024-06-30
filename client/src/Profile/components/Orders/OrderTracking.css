@@ -1,0 +1,47 @@
+/* OrderTracking.css */
+
+.timeline {
+    position: relative;
+    margin: 20px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 20px;
+    width: 4px;
+    background: blue;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+    padding-left: 40px;
+}
+
+.timeline-item::before {
+    content: '★';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    background: blue;
+    border-radius: 50%;
+    color: white;
+    text-align: center;
+    line-height: 20px;
+}
+
+.timeline-item.completed::before {
+    content: '✔';
+}
+
+.timeline-item span {
+    display: block;
+    margin-bottom: 5px;
+}

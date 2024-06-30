@@ -1,0 +1,9 @@
+@media (max-width: 480px) {
+    .product-card {
+      width: calc((50% - 10px) - 5px); /* Adjust based on your spacing */
+      margin-right: 30px; /* Spacing between cards */
+      float: left; /* Ensure cards float left */
+      clear: both; /* Clear float after two cards */
+    }
+  }
+    

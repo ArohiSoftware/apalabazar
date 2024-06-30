@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+ box-sizing: border-box;
+ margin: 0px;
+ padding:0px;
+ 
+}
+
+.scroll::-webkit-scrollbar {
+    display: none;  /* WebKit browsers */
+  }
+
+  .product-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .product-card:hover {
+    transform: scale(1.07);
+    box-shadow: 0 10px 20px 5px rgba(33, 33, 33, 0.15);
+    background:transparent;
+ 
+  }
+
+  .img{
+    transition: transform 0.3s;
+ border-radius: 20px;
+  }
+
+  .product-card:hover img {
+    transform: scale(1.12);
+    transform:translateY(-45px);
+    border-radius: 20px;
+    /* box-shadow: 0 10px 20px 5px rgba(33, 33, 33, 0.15); */
+    background:transparent;
+  }
