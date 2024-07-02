@@ -10,7 +10,7 @@ const Navbar = (props) => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { currentUser, isAuthenticated } = useSelector((state) => state.user);
+  const { currentUser=null, isAuthenticated } = useSelector((state) => state.user)|| {};
   
   const handleNavigate = () => {
     navigate("/category");

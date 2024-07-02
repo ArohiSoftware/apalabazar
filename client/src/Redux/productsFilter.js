@@ -36,7 +36,7 @@ export const { setDiscountRange, setPriceRange, setRating, resetFilters } =
 
 export default productFilterSlice.reducer;
 
-// Selectors
+
 export const selectDiscountRange = (state) => state.productFilter.discount;
 export const selectPriceRange = (state) => state.productFilter.priceRange;
 export const selectRating = (state) => state.productFilter.rating;

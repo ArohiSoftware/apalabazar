@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 function App() {
   const navigate = useNavigate();
-  const { currentUser, isAuthenticated } = useSelector((state) => state.user);
+  const { currentUser=null, isAuthenticated } = useSelector((state) => state.user)||{};
 
   useEffect(() => {
     if (isAuthenticated) {
