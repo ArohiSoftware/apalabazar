@@ -11,11 +11,19 @@ import sabja from "../Dryfruits/seeds-sabja-img.webp";
 import walnutakhrot from "../Dryfruits/walnutakhrot-kernels-chile-img.webp";
 import watermelonseed from "../Dryfruits/watermelontarbuj-seeds-img.webp";
 import ProductCard from "../../../customer/Components/Products/Cards";
+import { useSelector } from "react-redux";
+import { selectDiscountRange, selectPriceRange, selectRating } from "../../../Redux/productsFilter";
+import PriceBox from "../../Filters/Price";
+import DiscountBox from "../../Filters/Discount";
+import RatingBox from "../../Filters/Rating";
 
 export function Dryfruits({ showall, activeSubTab, setActiveTab }) {
+  const price = useSelector(selectPriceRange);
+  const discount = useSelector(selectDiscountRange);
+  const rating = useSelector(selectRating);
+
   const DryfruitsData = [
     {
-  
       id: 1,
       name: "Green Pumpkin Seeds",
       image: pumpkinseed,
@@ -55,7 +63,7 @@ export function Dryfruits({ showall, activeSubTab, setActiveTab }) {
       subCatogery: "Raisins",
     },
     {
-      id:4,
+      id: 4,
       name: "Pista Magaj-Plain Kernel ",
       image: pista,
       mrp: "₹300",
@@ -68,7 +76,7 @@ export function Dryfruits({ showall, activeSubTab, setActiveTab }) {
       subCatogery: "Pista",
     },
     {
-      id:5,
+      id: 5,
       name: "Black Raisins",
       image: raisinkishmish,
       mrp: "₹120",
@@ -81,7 +89,7 @@ export function Dryfruits({ showall, activeSubTab, setActiveTab }) {
       subCatogery: "Raisins",
     },
     {
-      id:5,
+      id: 5,
       name: "Sabja",
       image: sabja,
       mrp: "₹180",
@@ -94,7 +102,7 @@ export function Dryfruits({ showall, activeSubTab, setActiveTab }) {
       subCatogery: "Walnuts",
     },
     {
-      id:6,
+      id: 6,
       name: "Walnut/Akhrot",
       image: walnutakhrot,
       mrp: "₹1000",
@@ -107,7 +115,7 @@ export function Dryfruits({ showall, activeSubTab, setActiveTab }) {
       subCatogery: "Walnuts",
     },
     {
-      id:7,
+      id: 7,
       name: "Watermelon Seeds/Kallangadi Bija",
       image: watermelonseed,
       mrp: "₹80",
@@ -120,25 +128,36 @@ export function Dryfruits({ showall, activeSubTab, setActiveTab }) {
       subCatogery: "Walnuts",
     },
   ];
+  
+  const filterData = DryfruitsData.filter((data) => {
+    // if(discount !== 0 && price !== 0){
+    //   return Number(data.discount) >= discount && Number(data.price.split("₹")[1]) <= price;
+    // }
+    return Number(data.price.split("₹")[1]) <= price;
+  });
 
   return (
-
-    <div className=" mt-[12.5vh] cookingoilcards border w-full flex flex-wrap gap-9 ">
-      {DryfruitsData.map((data, index) => {
-        if (data.subCatogery === activeSubTab) {
-          return (
-            <ProductCard key={index} product={data} />
-          );
-        } else if (showall) {
-          return (
-            <ProductCard key={index} product={data} />
-          );
-        } else {
-          return (
-           null
-          )
-        }
-      })}
+    <div className="relative mt-8  w-full flex flex-col justify-start items-end  flex-wrap gap-9 ">
+     
+      <div className="w-full flex  flex-wrap gap-12">
+        {price.min !== 0 ?filterData.map((data, index) => {
+          if (data.subCatogery === activeSubTab && data.price <= price.max) {
+            return <ProductCard key={index} product={data} />;
+          } else if (showall) {
+            return <ProductCard key={index} product={data} />;
+          } else {
+            return null;
+          }
+        }): DryfruitsData.map((data, index) => {
+          if (data.subCatogery === activeSubTab) {
+            return <ProductCard key={index} product={data} />;
+          } else if (showall) {
+            return <ProductCard key={index} product={data} />;
+          } else {
+            return null;
+          }
+        })}
+      </div>
     </div>
   );
 }
