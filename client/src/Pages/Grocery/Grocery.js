@@ -109,8 +109,10 @@ function Grocery() {
   const [activeTab, setActiveTab] = useState("All Grocery");
   const [activeSubTab, setActiveSubTab] = useState("");
   const [showall, setShowAll] = useState(true);
-
+  const dispatch = useDispatch();
   const rating = useSelector(setRating);
+  const price = useSelector(selectPriceRange);
+  console.log(price);
 
   const [viewport, setViewport] = useState(false);
   useEffect(() => {
@@ -137,14 +139,24 @@ function Grocery() {
           key={"2"}
         />
 
-        <div className=" w-full">
-          <div className="flex gap-12 mt-8 justify-end items-end w-full ">
+        <div className=" w-full ">
+          <div className="flex gap-12 mt-8 flex-wrap justify-center lg:justify-end items-center w-full ">
+            <span
+              className={`bg-slate-200 text-xl flex gap-3 rounded-lg px-4 p-2 ${
+                price === 0 ? "hidden" : "block"
+              }`}
+            >
+              {price}
+              <button onClick={() => dispatch(setPriceRange(0))}>
+                <CloseIcon />
+              </button>
+            </span>
             <PriceBox />
             <DiscountBox />
             <RatingBox />
           </div>
           {activeTab === "All Grocery" ? (
-            <div className="flex   flex-wrap w-full">
+            <div className="flex justify-center items-center  flex-wrap w-full">
               <Dryfruits
                 activeSubTab={activeSubTab}
                 setActiveTab={setActiveSubTab}
@@ -200,3 +212,23 @@ function Grocery() {
 }
 
 export default Grocery;
+
+function CloseIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="lucide lucide-x"
+    >
+      <path d="M18 6 6 18" />
+      <path d="m6 6 12 12" />
+    </svg>
+  );
+}
