@@ -140,7 +140,7 @@ export function Dryfruits({ showall, activeSubTab, setActiveTab }) {
     <div className="relative mt-8  w-full flex flex-col justify-start items-end  flex-wrap gap-9 ">
      
       <div className="w-full flex  flex-wrap gap-12">
-        {price.min !== 0 ?filterData.map((data, index) => {
+        {price !== 0 ?filterData.map((data, index) => {
           if (data.subCatogery === activeSubTab && data.price <= price.max) {
             return <ProductCard key={index} product={data} />;
           } else if (showall) {

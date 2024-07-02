@@ -5,10 +5,7 @@ const initialState = {
     min: 0,
     max: 100,
   },
-  priceRange: {
-    min: 0,
-    max: 1000,
-  },
+  priceRange: 0,
   rating: 0,
 };
 

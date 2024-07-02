@@ -18,8 +18,11 @@ import hingpowder from "./powder-hing-img.webp";
 import shahjeera from "./royal-shahjeera-img.webp";
 import stoneflower from "./stone-flower-img.webp";
 import turmericpowder from "./turmeric-powder-img.webp";
+import { useSelector } from "react-redux";
+import { selectPriceRange } from "../../../Redux/productsFilter";
 
 export function Masala() {
+  const price = useSelector(selectPriceRange);
   const MasalaData = [
     {
       productname: "Chilli Powder",
@@ -171,21 +174,41 @@ export function Masala() {
       logo: logo,
     },
   ];
+
+  const filterData = MasalaData.filter((data) => {
+    return Number(data.aplabazarprice.split("₹")[1]) <= price;
+  });
   return (
     <div className="flex  flex-wrap w-full">
-      {MasalaData.map((data) => {
-        return (
-          <ProductCard
-            productname={data.productname}
-            productimg={data.productimg}
-            productprice={data.productprice}
-            aplabazarprice={data.aplabazarprice}
-            offprice={data.offprice}
-            quantity={data.quantity}
-            logo={data.logo}
-          />
-        );
-      })}
+      {price !== 0
+        ? filterData.map((data) => {
+            return (
+              <ProductCard
+                key={data.productname}
+                productname={data.productname}
+                productimg={data.productimg}
+                productprice={data.productprice}
+                aplabazarprice={data.aplabazarprice}
+                offprice={data.offprice}
+                quantity={data.quantity}
+                logo={data.logo}
+              />
+            );
+          })
+        : MasalaData.map((data) => {
+            return (
+              <ProductCard
+                key={data.productname}
+                productname={data.productname}
+                productimg={data.productimg}
+                productprice={data.productprice}
+                aplabazarprice={data.aplabazarprice}
+                offprice={data.offprice}
+                quantity={data.quantity}
+                logo={data.logo}
+              />
+            );
+          })}
     </div>
   );
 }

@@ -24,6 +24,7 @@ import {
 import PriceBox from "../Filters/Price";
 import DiscountBox from "../Filters/Discount";
 import RatingBox from "../Filters/Rating";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const sidebarDairy = [
   {
@@ -112,16 +113,51 @@ function Grocery() {
   const dispatch = useDispatch();
   const rating = useSelector(setRating);
   const price = useSelector(selectPriceRange);
+  const loc = useLocation();
+  const navigate = useNavigate();
   console.log(price);
 
+  const catogeryPaths = [
+    {
+      name: "Dry Fruits",
+      path: "/grocery/dry-fruits",
+    },
+    {
+      name: "Flours",
+      path: "/grocery/flours-grains",
+    },
+    {
+      name: "Masala & Spices",
+      path: "/grocery/masala-spices",
+    },
+    {
+      name: "Pulses",
+      path: "/grocery/pulses",
+    },
+    {
+      name: "Salt & Sugar",
+      path: "/grocery/salt-sugar-jaggery",
+    },
+    {
+      name: "Cooking Oil",
+      path: "/grocery/cooking-oil",
+    },
+  ];
   const [viewport, setViewport] = useState(false);
   useEffect(() => {
+    console.log(loc.pathname);
+    catogeryPaths.map((catogery) => {
+      if (loc.pathname === catogery.path) {
+        setActiveTab(catogery.name);
+        navigate("/grocery");
+      }
+    });
     if (window.innerWidth < 620) {
       setViewport(true);
     } else {
       setViewport(false);
     }
-  }, []);
+  }, [activeTab, setActiveTab, loc.pathname]);
 
   return (
     <div className="">

@@ -184,7 +184,7 @@ export function Flours({ activeSubTab }) {
 
   return (
     <div className=" mt-6 cookingoilcards border w-full flex flex-wrap gap-9 ">
-      {price.min !== 0
+      {price !== 0
         ? filterData.map((product, index) => (
             <ProductCard key={index} product={product} />
           ))

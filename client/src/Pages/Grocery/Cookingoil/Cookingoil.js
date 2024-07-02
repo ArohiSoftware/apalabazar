@@ -14,8 +14,11 @@ import soyabeanoil from "../Cookingoil/soyabean-flaxseeds-oil-img.webp";
 import sundropoil from "../Cookingoil/sundrop-lite-cooking-oil-img.webp";
 import sunfloweroil from "../Cookingoil/sunflower-cooking-oil-img.webp";
 import coconutoil from "../Cookingoil/unrefined-cold-pressed-virgin-coconut-oil-img.webp";
+import { useSelector } from "react-redux";
+import { selectPriceRange } from "../../../Redux/productsFilter";
 
 export function Cookingoil() {
+  const price = useSelector(selectPriceRange);
   const CookingOilData = [
     {
       id: 1,
@@ -44,7 +47,7 @@ export function Cookingoil() {
       name: "Light Olive Oil-Frying & Grilling",
       image: lightoliveoil,
       mrp: "₹920",
-      price:563,
+      price: 563,
       discount: "39",
       weight: "1 L",
       url: `/product/${"Mccain Smiles".replace(/ /g, "-").toLowerCase()}`,
@@ -78,7 +81,7 @@ export function Cookingoil() {
       image: sesameoil,
       mrp: "₹625",
       price: 625,
-      discount:"19",
+      discount: "19",
       weight: "1 L",
       url: `/product/${"Mccain Smiles".replace(/ /g, "-").toLowerCase()}`,
     },
@@ -99,7 +102,7 @@ export function Cookingoil() {
       name: "Sundrop Lite-Cooking Oil",
       image: sundropoil,
       mrp: "₹190",
-      price:185,
+      price: 185,
       discount: "5",
       weight: "1 L",
       url: `/product/${"Mccain Smiles".replace(/ /g, "-").toLowerCase()}`,
@@ -121,19 +124,25 @@ export function Cookingoil() {
       name: " Unrefined  Coconut Oil-Naturally",
       image: coconutoil,
       mrp: "₹699",
-      price:524,
+      price: 524,
       discount: "25",
       weight: "1 L",
       url: `/product/${"Mccain Smiles".replace(/ /g, "-").toLowerCase()}`,
     },
   ];
+  const filterData = CookingOilData.filter((data) => {
+    return Number(data.price) <= price;
+  });
   return (
     <>
       <div className=" mt-[12.5vh] cookingoilcards border w-full flex flex-wrap gap-9 ">
-      {CookingOilData.map((product, index) => (
-          <ProductCard key={index} product={product} />
-        ))}
-   
+        {price !== 0
+          ? filterData.map((product, index) => {
+              <ProductCard key={index} product={product} />;
+            })
+          : CookingOilData.map((product, index) => {
+              <ProductCard key={index} product={product} />;
+            })}
       </div>
     </>
   );

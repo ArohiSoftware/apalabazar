@@ -10,11 +10,13 @@ import mixdal from '../Pulses/mix-dal-img.webp'
 import moongdal from '../Pulses/moong-dal-img.webp'
 import toordal from '../Pulses/toor-arhar-dal-img.webp'
 import uraddal from '../Pulses/urad-dal-white-img.webp'
+import { useSelector } from 'react-redux'
+import { selectPriceRange } from '../../../Redux/productsFilter'
 
 
 
 export function Pulses() {
-
+  const price = useSelector(selectPriceRange)
 const PulsesData = [
   {
     productname:"Green Pumpkin Seeds" ,
@@ -99,23 +101,44 @@ const PulsesData = [
   
 
 ];
+ const filterData = PulsesData.filter((data) => {
+   return Number(data.aplabazarprice.split("₹")[1]) <= price;
+ });
 return(
 
 <div className='flex  flex-wrap w-full'>
 
-{
-  PulsesData.map(
-    (data) => {
-    
-  return (
-    
-     <ProductCard  productname={data.productname} productimg={data.productimg} productprice={data.productprice} aplabazarprice={data.aplabazarprice} offprice={data.offprice} quantity={data.quantity} logo={data.logo} />
-  )
-}
-  )
-}
 
-</div>
+    {
+      price !== 0 ? filterData.map((data) => {
+        return (
+          <ProductCard
+            key={data.productname}
+            productname={data.productname}
+            productimg={data.productimg}
+            productprice={data.productprice}
+            aplabazarprice={data.aplabazarprice}
+            offprice={data.offprice}
+            quantity={data.quantity}
+            logo={data.logo}
+          />
+        );
+      }) : PulsesData.map((data) => {
+        return (
+          <ProductCard
+            key={data.productname}
+            productname={data.productname}
+            productimg={data.productimg}
+            productprice={data.productprice}
+            aplabazarprice={data.aplabazarprice}
+            offprice={data.offprice}
+            quantity={data.quantity}
+            logo={data.logo}
+          />
+        );
+      })
+    }
+  </div>
     
   )
 }

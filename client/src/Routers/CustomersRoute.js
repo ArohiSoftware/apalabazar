@@ -22,25 +22,29 @@ function CustomersRoute() {
   return (
     <div>
       <Routes>
-      <Route path="/" element={<HomePage />}></Route>
-      <Route path="/grocery" element={<Grocery />}></Route>
-      <Route path="/appliances" element={<HomeAppliances />}></Route>
-      <Route path="/cleaner" element={<DetergentFabricCare />}></Route>
-      <Route path="/detergent" element={<DetergentFabricCare />}></Route>
-      <Route path="/valuepack" element={<ValuePack />}></Route>
-      <Route path="/category" element={<Category />} />
-      <Route path="/dairy" element={<Dairy />}></Route>
-      <Route path="/cart" element={<Cart/>}></Route>
-      <Route path="/product/:id" element={<ProductDetails />}></Route>
-      <Route path="/searchpage" element={<SearchDashboard/>}></Route>
-      <Route path="/login" element={<Login />}></Route>
-      <Route path="/checkout" element={<Checkout />}></Route>
-      <Route path="/myprofile" element={<Profile/>}></Route>
-
-
+        <Route path="/" element={<HomePage />}></Route>
+        <Route path="/grocery" element={<Grocery />}></Route>
+        <Route path="/grocery/pulses" element={<Grocery />}></Route>
+        <Route path="/grocery/dry-fruits" element={<Grocery />}></Route>
+        <Route path="/grocery/cooking-oil" element={<Grocery />}></Route>
+        <Route path="/grocery/flours-grains" element={<Grocery />}></Route>
+        <Route path="/grocery/salt-sugar-jaggery" element={<Grocery />}></Route>
+        <Route path="/grocery/masala-spices" element={<Grocery />}></Route>
+        <Route path="/appliances" element={<HomeAppliances />}></Route>
+        <Route path="/cleaner" element={<DetergentFabricCare />}></Route>
+        <Route path="/detergent" element={<DetergentFabricCare />}></Route>
+        <Route path="/valuepack" element={<ValuePack />}></Route>
+        <Route path="/category" element={<Category />} />
+        <Route path="/dairy" element={<Dairy />}></Route>
+        <Route path="/cart" element={<Cart />}></Route>
+        <Route path="/product/:id" element={<ProductDetails />}></Route>
+        {/* <Route path="/searchpage" element={<SearchDashboard />}></Route> */}
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/checkout" element={<Checkout />}></Route>
+        <Route path="/myprofile" element={<Profile />}></Route>
       </Routes>
     </div>
-  )
+  );
 }
 
 export default CustomersRoute
