@@ -9,14 +9,14 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  price:{
+  price: {
     type: Number,
     required: true,
   },
-  discountedPrice:{
+  discountedPrice: {
     type: Number,
   },
-  discountPersent: {
+  discountPercent: {
     type: Number,
   },
   quantity: {
@@ -24,16 +24,14 @@ const productSchema = new mongoose.Schema({
   },
   brand: {
     type: String,
-  }, 
-  imageUrl:{
+  },
+  imageUrl: {
     type: String,
   },
-  ratings: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'ratings',
-    },
-  ],
+  ratings: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'ratings',
+  }],
   reviews: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'reviews',

@@ -175,7 +175,7 @@ const PriceSummary = () => {
       <h2 className="text-xl font-semibold mb-2">Price Summary</h2>
       <div className="flex justify-between mb-2">
         <span>You Pay</span>
-        <span className="text-green-500">₹276</span>
+        <span className="text-green-500 font-bold">₹276</span>
       </div>
       <div className="flex justify-between mb-2">
         <span>Cart Total</span>
@@ -184,8 +184,8 @@ const PriceSummary = () => {
       <div className="flex justify-between mb-2">
         <span>Delivery charge</span>
         <div className='space-x-3'>
-            <span className="text-red-500 line-through">₹29</span>
-        <span className="text-green-500">₹0</span>
+            <span className="text-red-500 line-through">₹3-</span>
+        <span className="text-green-500">₹20</span>
         </div>
       </div>
       <div className="flex justify-between mb-2">
