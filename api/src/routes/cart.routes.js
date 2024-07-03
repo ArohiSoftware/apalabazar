@@ -1,7 +1,9 @@
 import express from "express";
-import {upload} from "../middlewares/multer.middleware.js";
+import {upload} from "../middleware/multer.middlware.js";
 import { addAddress, addToCart, deleteAddress, getAllAddress, getCartDetails, getCartItemsById, removeAllCart, removeOneCart, updateAddress } from "../controller/cart.controller.js";
-import { verifyToken } from "../middlewares/verifyUser.js";
+
+
+import { verifyToken } from "../middleware/verifyUser.js";
 
 
 const cartRouter = express.Router();

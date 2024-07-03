@@ -475,7 +475,8 @@ const getAllAddress = asyncHandler(async(req, res) => {
 
     console.log("req.user => ", req.user);
 
-    const user = await User.findById({id});
+    const user = await User.findById({_id:id});
+
     if(!user) {
         return res
             .status(401)
@@ -485,7 +486,7 @@ const getAllAddress = asyncHandler(async(req, res) => {
 
 
     try {
-        const address = await Address.find({user: id}).populate('user');
+        const address = await Address.find({user: id})
 
         if (!address) {
             return res
