@@ -1,12 +1,13 @@
 import express from 'express';
-import { createProduct } from '../product/product.js';
-import productRouter from './product.js';
+import productRouter from './product.routes.js';
+import categoryRouter from './category.routes.js';
+
+
+
 const adminRouter = express.Router();
 
 
-
-
-adminRouter.use('/category',createProduct);  
+adminRouter.use('/category', categoryRouter);  
 adminRouter.use('/product', productRouter);  
 
 

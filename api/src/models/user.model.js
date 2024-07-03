@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+import jwt from 'jsonwebtoken';
 const userSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
@@ -42,6 +42,32 @@ const userSchema = new mongoose.Schema({
         default: Date.now,
     }
 }, { timestamps: true });
+
+
+
+userSchema.methods = {
+
+    generateUserToken: function() {
+        
+        return jwt.sign(
+            {
+                id: this._id,
+                role: this.role,
+                email: this.email,
+                firstName: this.firstName,
+                lastName: this.lastName,
+
+            },
+        
+            process.env.JWT_SECRET, 
+            
+            {expiresIn: '1h'}
+        );
+    
+    },
+}
+
+
 
 const User = mongoose.model("User", userSchema);
 

@@ -3,6 +3,11 @@ import app from './app.js';
 import { config } from 'dotenv';
 
 const PORT = 5454;
+import dotenv from 'dotenv';
+
+dotenv.config({
+  path: './.env',
+});
 
 config({
   path: './.env'
@@ -11,18 +16,13 @@ config({
 
 
 
-
-// "mongodb+srv://shivamofficial285:VhAqQlSd7UO4mSO7@apalabazar.jcypil6.mongodb.net/";
-// const MONGO = "mongodb+srv://apalabazar:IAKQKP3lF4hcyKg2@cluster0.k8mosmp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-// mongodb+srv://apalabazar:IAKQKP3lF4hcyKg2@cluster0.k8mosmp.mongodb.net/
-
 connectDB()
 
 
 .then(() => {
 
   app.listen(PORT, () => {
-    console.log(`⚙️  ⚙️   Server is running on port ${PORT} successfully 🎉  ➡️  ✈️`);
+    console.log(`⚙️  ⚙️   Server is running on port ${PORT} successfully 🎉  ➡️  ✈️  \n \t check health at http://localhost:${PORT}/`);
   });
 
 })

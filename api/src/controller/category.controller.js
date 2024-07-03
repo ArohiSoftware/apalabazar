@@ -1,5 +1,5 @@
-// category.controller.js
 import Category from '../models/category.model.js';
+import slugify from 'slugify';
 
 // Create category
 export const createCategory = async (req, res) => {
@@ -10,7 +10,8 @@ export const createCategory = async (req, res) => {
     }
 
     try {
-        const category = new Category({ name, parentCategory, level });
+        const slug = slugify(name, { lower: true });
+        const category = new Category({ name, slug, parentCategory, level });
         const savedCategory = await category.save();
         return res.status(201).send({ message: "Category created successfully", status: true, data: savedCategory });
     } catch (error) {
@@ -24,7 +25,7 @@ export const viewCategory = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const category = await Category.findById(id);
+        const category = await Category.findById(id).populate('parentCategory');
 
         if (!category) {
             return res.status(404).send({ message: "Category not found", status: false });
@@ -47,9 +48,10 @@ export const updateCategory = async (req, res) => {
     }
 
     try {
+        const slug = slugify(name, { lower: true });
         const updatedCategory = await Category.findByIdAndUpdate(
             id,
-            { name, parentCategory, level },
+            { name, slug, parentCategory, level },
             { new: true }
         );
 

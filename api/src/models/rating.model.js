@@ -9,6 +9,7 @@ const ratingSchema = new Schema({
       product: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'products',
+        required: true,
       },
       rating: {
         type: Number,

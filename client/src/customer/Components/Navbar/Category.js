@@ -12,7 +12,7 @@ const Category = () => {
   return (
     <div>
       <Navbar />
-      <div className="container mx-auto p-4 bg-white relative min-h-screen">
+      <div className="container mx-auto  p-4 bg-white relative min-h-screen">
         <button
           onClick={() => handleNavigate("/")}
           className="absolute top-4 right-4 text-lg font-bold bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center"

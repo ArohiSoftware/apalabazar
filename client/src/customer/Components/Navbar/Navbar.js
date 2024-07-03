@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Register from "../Auth/Register";
-import { HiUserCircle } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { setUser, clearUser } from '../../../Redux/User/userSlice';
 import { useSelector, useDispatch } from "react-redux";
+import { FaUser, FaHeart, FaBox, FaSignOutAlt } from "react-icons/fa"; // Importing React Icons
 
 const Navbar = (props) => {
   const [showModal, setShowModal] = useState(false);
+  const [hoverDropdown, setHoverDropdown] = useState(false);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const { currentUser=null, isAuthenticated } = useSelector((state) => state.user)|| {};
   
+
   const handleNavigate = () => {
     navigate("/category");
   };
@@ -19,39 +23,38 @@ const Navbar = (props) => {
   const handleSearch = () => {
     navigate("/searchpage");
   };
-  
+
   const showCart = () => {
     navigate("/cart");
   };
 
-  useEffect(() => {
-    const checkSession = async () => {
-      try {
-        const response = await axios.get('http://localhost:5454/api/auth/session', { withCredentials: true });
-        if (response.data.status) {
-          dispatch(setUser(response.data.user));
-        } else {
-          dispatch(clearUser());
-        }
-      } catch (error) {
-        console.error('Error checking session:', error);
-      }
-    };
-  
-    checkSession();
-  }, [dispatch]);
-  
 
   const handleProfileClick = () => {
-    if (currentUser.role === 'ADMIN') {
+    if (localStorage.getItem('role') === "ADMIN") {
       navigate('/admin');
     } else {
       navigate('/myprofile/profile');
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    dispatch(clearUser());
+    navigate('/');
+  };
+
+  const handleMouseEnter = (event) => {
+    const { top, left, height } = event.currentTarget.getBoundingClientRect();
+    setDropdownPosition({ top: top + height, left });
+    setHoverDropdown(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHoverDropdown(false);
+  };
+
   return (
-    <div className="shadow-lg overflow-hidden">
+    <div className="shadow-lg overflow-hidden relative">
       {/* Top Navbar */}
       <div className="bg-white p-4 border-b-[2px] flex items-center justify-between">
         <a href="/" className="flex items-center space-x-4">
@@ -77,37 +80,92 @@ const Navbar = (props) => {
           </button>
         </div>
         <div className="flex space-x-12">
-          <div className="flex items-center space-x-2 rounded-md p-2 border-[1px] bg-blue-500 hover:bg-blue-600">
-            <svg
-              className="w-6 h-6 text-zinc-700 border-zinc-700 border-[2px] bg-white rounded-xl"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+          <div className="relative">
+            <div
+              className="flex items-center space-x-2 rounded-md p-2 border-[1px] bg-blue-500 hover:bg-blue-600"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5.121 17.804A8.966 8.966 0 0112 15c2.485 0 4.735.994 6.379 2.621M15 10a3 3 0 11-6 0 3 3 0 016 0z"
-              ></path>
-            </svg>
-            {isAuthenticated ? (
-              <button
-                onClick={handleProfileClick}
-                className="text-white font-medium"
+              <svg
+                className="w-6 h-6 text-zinc-700 border-zinc-700 border-[2px] bg-white rounded-xl"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                Profile
-              </button>
-            ) : (
-              <button
-                onClick={() => setShowModal(true)}
-                className="text-white font-medium"
-              >
-                Sign In / Register
-              </button>
-            )}
-            <Register showModal={showModal} setShowModal={setShowModal} />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M5.121 17.804A8.966 8.966 0 0112 15c2.485 0 4.735.994 6.379 2.621M15 10a3 3 0 11-6 0 3 3 0 016 0z"
+                ></path>
+              </svg>
+              {localStorage.getItem('authToken') ? (
+                <button
+                  onClick={handleProfileClick}
+                  className="text-white font-medium flex items-center"
+                >
+                  Profile
+                  <svg
+                    className="w-4 h-4 ml-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M19 9l-7 7-7-7"
+                    ></path>
+                  </svg>
+                </button>
+              ) : (
+                <button
+                  onClick={() => setShowModal(true)}
+                  className="text-white font-medium"
+                >
+                  Sign In / Register
+                </button>
+              )}
+              <Register showModal={showModal} setShowModal={setShowModal} />
+            </div>
+            {hoverDropdown && (
+                <div
+                  className="fixed bg-white shadow-lg  space-y-2  w-fit border-[1px] border-gray-200 rounded-md z-[1000]"
+                  style={{ top: dropdownPosition.top, left: dropdownPosition.left }}
+                >
+                  <button
+                    onClick={() => navigate('/myprofile')}
+                    className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left"
+                  >
+                    <FaUser className="mr-2" />
+                    My Profile
+                  </button>
+                  <button
+                    onClick={() => navigate('/wishlist')}
+                    className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left"
+                  >
+                    <FaHeart className="mr-2" />
+                    Wishlist
+                  </button>
+                  <button
+                    onClick={() => navigate('/orders')}
+                    className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left"
+                  >
+                    <FaBox className="mr-2" />
+                    Orders
+                  </button>
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left"
+                  >
+                    <FaSignOutAlt className="mr-2" />
+                    Logout
+                  </button>
+                </div>
+              )}
           </div>
           <div className="flex items-center space-x-2">
             <button onClick={showCart}>

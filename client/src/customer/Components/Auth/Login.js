@@ -4,6 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import Register from '../assets/register.png';
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom"; // Import Link for navigation
+import axiosInstance from "../../../axiosConfig";
 
 const sharedClasses = {
   textZinc: "text-zinc-500",
@@ -34,10 +35,19 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:5454/api/auth/login', { email, password });
+      const response = await axiosInstance.post(`/auth/login`, { email, password }, { withCredentials: true });
       if (response.data.status) {
+        // Store the token and role in localStorage
+        localStorage.setItem('authToken', response.data.token);
+        localStorage.setItem('role', response.data.data.role);
         toast.success("Login successful");
-        navigate("/");
+        
+        // Navigate based on user role
+        if (response.data.data.role === 'ADMIN') {
+          navigate('/admin');
+        } else {
+          navigate('/');
+        }
       } else {
         toast.error("Invalid email or password");
       }
@@ -116,6 +126,7 @@ const Login = () => {
           </form>
         </div>
       </div>
+      {/* Place ToastContainer here to catch all toast notifications */}
       <ToastContainer position="bottom-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
     </div>
   );

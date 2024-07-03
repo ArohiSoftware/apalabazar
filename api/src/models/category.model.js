@@ -45,18 +45,18 @@ const categorySchema = new mongoose.Schema({
     },
     level: {
         type: Number,
-        required: true,
-        default: 1,
+        required: true
     },
     slug: {
         type: String,
         required: true,
         unique: true
     },
-    parentId: {
+    parentCategory: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category', // Ensure the ref matches the model name
-    }
+        ref: 'Category',
+        default: null
+    },
 }, { timestamps: true });
 
 const Category = mongoose.model("Category", categorySchema);
