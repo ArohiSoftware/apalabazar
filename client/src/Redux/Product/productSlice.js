@@ -1,5 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axiosInstance from '../../axiosConfig';
+export const fetchSimilarProducts = createAsyncThunk('products/fetchSimilarProducts', async (productId, { rejectWithValue }) => {
+  try {
+    const response = await axiosInstance.get(`/admin/product/similar/${productId}`);
+    return response.data.data;
+  } catch (error) {
+    return rejectWithValue(error.response.data);
+  }
+});
 
 export const createProduct = createAsyncThunk('products/createProduct', async (productData, { rejectWithValue }) => {
   try {
@@ -49,11 +57,12 @@ export const fetchProduct = createAsyncThunk('products/fetchProduct', async (pro
 });
 
 
-
 const productSlice = createSlice({
   name: 'products',
   initialState: {
     products: [],
+    productDetails: {},
+    similarProducts: [],
     status: 'idle',
     error: null,
   },
@@ -115,8 +124,18 @@ const productSlice = createSlice({
       .addCase(fetchProduct.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
+      })
+      .addCase(fetchSimilarProducts.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchSimilarProducts.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.similarProducts = action.payload;
+      })
+      .addCase(fetchSimilarProducts.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
       });
-      
   },
 });
 

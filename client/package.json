@@ -21,7 +21,7 @@
     "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
     "chart.js": "^4.4.3",
-    "firebase": "^10.12.4",
+    "firebase": "^10.12.5",
     "framer-motion": "^11.3.19",
     "input-otp": "^1.2.4",
     "js-cookie": "^3.0.5",

@@ -13,6 +13,10 @@ import RatingsAndReviews from '../customer/Components/ReviewProduct/Reviewform.j
 import SearchPage from '../Pages/SearchPage.js';
 import TermsAndConditions from '../Pages/TermsCondition.js';
 import ReturnPolicy from '../Pages/cancellation_policy.js';
+import FAQ from '../customer/Components/FAQ/Faq.js';
+import ContactUs from '../customer/Components/ContactUs/ContactUs.js';
+import Privacy from '../Pages/Privacy.js';
+import TermsOfUse from '../Pages/TermsCondition.js';
 
 
 
@@ -34,6 +38,13 @@ function CustomersRoute() {
       <Route path="/search/:name" element={<SearchPage/>}></Route>
       <Route path="/termscondition" element={<TermsAndConditions/>}></Route>
       <Route path="/returnpolicy" element={<ReturnPolicy/>}></Route>
+      <Route path="/faq" element={<FAQ/>}></Route>
+      <Route path="/contact" element={<ContactUs/>}></Route>
+      <Route path="/privacy" element={<Privacy/>}></Route>
+      <Route path="/terms" element={<TermsOfUse/>}></Route>
+
+
+
 
 
       </Routes>

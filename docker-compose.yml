@@ -23,7 +23,6 @@ services:
       - "80:80"
     environment:
       - NODE_ENV=production
-      - REACT_APP_BASE_URL=http://apalabajar.com:5454/api
     networks:
       - app-network
 networks:
